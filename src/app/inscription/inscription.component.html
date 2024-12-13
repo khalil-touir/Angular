@@ -1,0 +1,115 @@
+<div class="container">
+    <h2>Formulaire d'inscription</h2>
+    <form [formGroup]="inscriptionForm" (ngSubmit)="onSubmit()">
+      <!-- Nom -->
+      <div class="form-group">
+        <label for="nom">Nom :</label>
+        <input
+          id="nom"
+          type="text"
+          class="form-control"
+          formControlName="nom"
+        />
+        <div
+          *ngIf="inscriptionForm.get('nom')?.invalid && inscriptionForm.get('nom')?.touched"
+          class="error-message"
+        >
+          Nom invalide !
+        </div>
+      </div>
+  
+      <!-- Prénom -->
+      <div class="form-group">
+        <label for="prenom">Prénom :</label>
+        <input
+          id="prenom"
+          type="text"
+          class="form-control"
+          formControlName="prenom"
+        />
+        <div
+          *ngIf="inscriptionForm.get('prenom')?.invalid && inscriptionForm.get('prenom')?.touched"
+          class="error-message"
+        >
+          Prénom invalide !
+        </div>
+      </div>
+  
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email :</label>
+        <input
+          id="email"
+          type="email"
+          class="form-control"
+          formControlName="email"
+        />
+        <div
+          *ngIf="inscriptionForm.get('email')?.invalid && inscriptionForm.get('email')?.touched"
+          class="error-message"
+        >
+          Email invalide !
+        </div>
+      </div>
+  
+      <!-- Mot de passe -->
+      <div class="form-group">
+        <label for="motDePasse">Mot de passe :</label>
+        <input
+          id="motDePasse"
+          type="password"
+          class="form-control"
+          formControlName="motDePasse"
+        />
+        <div
+          *ngIf="inscriptionForm.get('motDePasse')?.invalid && inscriptionForm.get('motDePasse')?.touched"
+          class="error-message"
+        >
+          Mot de passe invalide !
+        </div>
+      </div>
+  
+      <!-- Confirmation mot de passe -->
+      <div class="form-group">
+        <label for="confirmationMotDePasse">Confirmation :</label>
+        <input
+          id="confirmationMotDePasse"
+          type="password"
+          class="form-control"
+          formControlName="confirmationMotDePasse"
+        />
+        <div
+          *ngIf="
+            inscriptionForm.get('confirmationMotDePasse')?.value !==
+              inscriptionForm.get('motDePasse')?.value &&
+            inscriptionForm.get('confirmationMotDePasse')?.touched
+          "
+          class="error-message"
+        >
+          Les mots de passe ne correspondent pas !
+        </div>
+      </div>
+  
+      <div class="button-container">
+        <!-- Le bouton d'inscription -->
+        <button
+          type="submit"  
+          class="btn btn-primary"
+          [disabled]="inscriptionForm.invalid" 
+        >
+          S'inscrire
+        </button>
+      
+        <!-- Lien pour rediriger vers la page de connexion -->
+        <button
+          type="button"  
+          class="btn btn-link"
+          (click)="redirectToConnexion()"  
+        >
+          Se connecter
+        </button>
+      </div>
+      
+    </form>
+  </div>
+  

@@ -1,0 +1,56 @@
+<!-- src/app/dashboard/dashboard.component.html -->
+<div class="dashboard-container">
+  <h2>Météo actuelle pour {{ city }}</h2>
+
+  <!-- Affichage des données météo -->
+  <div *ngIf="weatherData; else errorTemplate" class="weather-data">
+    <p><strong>Température:</strong> {{ weatherData.main.temp }} °C</p>
+    <p><strong>Conditions:</strong> {{ weatherData.weather[0].description }}</p>
+  </div>
+
+  <ng-template #errorTemplate>
+    <p class="error-message">{{ error }}</p>
+  </ng-template>
+
+  <!-- Formulaire pour changer de ville -->
+  <div class="city-input">
+    <input type="text" [(ngModel)]="city" placeholder="Entrez une ville" />
+    <button (click)="updateCity(city)">Mettre à jour la ville</button>
+  </div>
+
+  <!-- Formulaire de paiement Stripe -->
+  <div class="payment-form">
+    <h3>Effectuer un paiement</h3>
+    <form (submit)="handlePayment($event)">
+      <div id="card-element">
+        <!-- L'élément de la carte sera monté ici -->
+      </div>
+      <button type="submit">Payer</button>
+    </form>
+    <div id="card-errors" role="alert"></div>
+  </div>
+<!-- Champ d'entrée pour le QR code -->
+<div>
+  <input
+    type="text"
+    [(ngModel)]="qrText"
+    placeholder="Entrez le texte pour générer un QR Code"
+    style="padding: 10px; width: 300px; margin-bottom: 10px;"
+  />
+  <button
+    (click)="generateQRCode()"
+    style="padding: 10px 20px; margin-left: 10px; font-size: 16px;"
+  >
+    Générer QR Code
+  </button>
+</div>
+
+<!-- Affichage du QR code généré -->
+<div *ngIf="generatedQrText" style="margin-top: 20px;">
+  <qrcode
+    [qrdata]="generatedQrText"
+    [width]="256"
+    [errorCorrectionLevel]="'M'"
+  ></qrcode>
+</div>
+</div>
